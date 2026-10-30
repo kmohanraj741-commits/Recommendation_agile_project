@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }}</title><style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb;color:#1e293b}
+header{background:linear-gradient(120deg,#172554,#2563eb);color:white;padding:30px 7%}
+header h1{margin:0 0 8px}main{max-width:1050px;margin:28px auto;padding:0 18px}
+.toolbar{display:flex;gap:12px;align-items:end;flex-wrap:wrap;background:white;padding:18px;border-radius:14px;margin-bottom:20px}
+label{display:block;font-weight:bold;font-size:13px;margin-bottom:6px}
+select,button{padding:11px 13px;border:1px solid #cbd5e1;border-radius:8px;background:white}
+button{background:#2563eb;color:white;border:0;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.item{background:white;border-radius:14px;padding:18px;box-shadow:0 4px 18px #0f172a0d}
+.emoji{font-size:32px}.category{display:inline-block;background:#dbeafe;color:#1d4ed8;padding:5px 9px;border-radius:20px;font-size:12px}
+.price{font-weight:bold;font-size:18px;margin-top:14px}.score{color:#64748b;font-size:13px;margin-top:5px}
+footer{text-align:center;color:#64748b;padding:24px;font-size:13px}
+</style></head><body>
+<header><h1>Recommendation System</h1><p>{{ subtitle }}</p></header><main>
+{% if feature == 'filter' %}
+<form class="toolbar" method="get"><div><label for="category">Filter by category</label>
+<select id="category" name="category">{% for cat in categories %}<option value="{{ cat }}" {% if selected == cat %}selected{% endif %}>{{ cat }}</option>{% endfor %}</select></div><button>Apply Filter</button></form>
+{% elif feature == 'sort' %}
+<form class="toolbar" method="get"><div><label for="sort">Sort recommendations</label><select id="sort" name="sort">
+<option value="score" {% if selected == 'score' %}selected{% endif %}>Recommendation Score: Highest First</option>
+<option value="name" {% if selected == 'name' %}selected{% endif %}>Name: A to Z</option>
+<option value="price_low" {% if selected == 'price_low' %}selected{% endif %}>Price: Low to High</option>
+<option value="price_high" {% if selected == 'price_high' %}selected{% endif %}>Price: High to Low</option>
+</select></div><button>Apply Sorting</button></form>
+{% endif %}
+<section class="grid">{% for item in items %}<article class="item"><div class="emoji">{{ item.emoji }}</div><h3>{{ item.name }}</h3>
+<span class="category">{{ item.category }}</span><div class="price">₹{{ item.price }}</div><div class="score">Recommendation score: {{ item.score }}/100</div></article>
+{% else %}<p>No items match your selection.</p>{% endfor %}</section></main>
+<footer>Agile Development Process and DevOps | Recommendation System | {{ version }}</footer></body></html>

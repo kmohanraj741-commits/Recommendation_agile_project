@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: recommendation-v1
-          image: YOUR_DOCKERHUB_USERNAME/recommendation-system:v1
+          image: mohanraj741/recommendation-system:v1
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
